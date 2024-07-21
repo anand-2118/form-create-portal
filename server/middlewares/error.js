@@ -13,8 +13,8 @@ const logErrorMiddleware = (err, req, res, _) => {
     const now = new Date();
     const time = ` ${now.toLocaleTimeString()} `;
     const log = `${req.method} ${req.originalUrl} ${time} `
-    errorStream.write(error + ' ' + err.stack + ' ' + log + "\n")
-    res.status(500).send("internal server error").end();
+    errorStream.write(error + ' ' + err.stack + '\n' + err.status + ' ' + err.message + ' ' + log + "\n")
+    res.status(err.statusCode).send(err.message);
 }
 
 module.exports = { logErrorMiddleware };

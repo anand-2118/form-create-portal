@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors')
 const { logErrorMiddleware } = require('./middlewares/error');
 const { logRequestsMiddleware } = require('./middlewares/request');
+const authenticationRoute = require('./routes/authenticationRouter');
 
 env.config({ path: `${__dirname}/../.env` });
 
@@ -24,9 +25,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // to intercept and log the request
 app.use(logRequestsMiddleware);
 
-app.get('/', (_, res, __) => {
-    res.send("Hello developers");
-});
+// app.use('/', (_, res, __) => {
+//     res.send("Hello developers");
+// });
+
+app.use('/user', authenticationRoute);
 
 app.use(logErrorMiddleware);
 
