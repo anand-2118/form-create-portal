@@ -24,4 +24,7 @@ client/yarn-error.log*
 # server files/folders
 server/node_modules
 server/build
+server/logs
+
+.env
 
